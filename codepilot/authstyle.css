@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    padding: 0; 
+    margin: 0; 
+    box-sizing: 
+    border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    min-height: 100vh; 
+    background-color: #f4f7ff;
+    padding: 20px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
+.auth-logo { 
+	margin-bottom: 25px;
+}
+
+.auth-logo img { 
+	height: 40px;
+}
+
+.auth-card {
+    background: white;
+    width: 100%;
+    padding: 40px;
+    border-radius: 28px;
+    box-shadow: 0 15px 35px #387FF51A;
+}
+
+h1 { font-size: 24px;
+	color: #1C1F25;
+	text-align: center;
+	margin-bottom: 8px;
+}
+
+.subtitle { 
+	font-size: 14px; 
+	color: #4B5162; 
+	text-align: center; 
+	margin-bottom: 30px;
+}
+
+.error-message {
+    background: #FFF0F0; 
+    color: #D93025; 
+    padding: 12px;
+    border-radius: 12px; 
+    font-size: 13px; 
+    margin-bottom: 20px;
+    text-align: center; 
+    display: none;
+    border: 1px solid #FFD2D2;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 18px; 
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #E0E4EC;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    background: #F9FBFF;
+}
+
+.input-group label {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9BA3AF;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -10px; 
+    left: 10px; 
+    font-size: 12px;
+    background: white;
+    padding: 0 5px;
+    color: #387FF5; 
+    font-weight: 600;
+}
+
+.input-group input:focus { 
+	border-color: #387FF5; 
+	background: white;
+}
+
+.auth-btn {
+    width: 100%; 
+    background: #387FF5; 
+    color: white; 
+    border: none;
+    padding: 14px; 
+    border-radius: 12px; 
+    font-size: 16px; 
+    font-weight: 600;
+    cursor: pointer; 
+    transition: 0.3s; 
+    margin-top: 5px;
+}
+
+.auth-btn:hover { 
+	background: #2D6CD1; 
+	box-shadow: 0 5px 15px #387FF54D; 
+}
+
+.toggle-text {
+   text-align: center; 
+   margin-top: 25px;
+   font-size: 14px;
+   color: #4B5162; 
+}
+
+.toggle-text a {
+	color: #387FF5;
+	text-decoration: none;
+	font-weight: 600;
+}

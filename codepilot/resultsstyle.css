@@ -1,0 +1,238 @@
+.results-wrapper {
+    display: flex;
+    gap: 40px;
+    margin: 40px auto 100px;
+    align-items: flex-start;
+}
+
+.results-details {
+    flex: 1;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #1C1F25;
+    font-weight: 800;
+}
+
+.res-card {
+    background: white;
+    border: 1px solid #E7ECF5;
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 20px;
+    position: relative;
+    border-left: 8px solid #E7ECF5;
+    transition: 0.3s;
+}
+
+.res-card.correct { border-left-color: #2E7D32; }
+.res-card.wrong { border-left-color: #D93025; }
+
+.res-card__num {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #8A94A6;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.res-card h3 {
+    font-size: 19px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+    color: #1C1F25;
+}
+
+.res-answers, .res-correct {
+    font-size: 14px;
+    padding: 18px;
+    border-radius: 16px;
+    line-height: 1.6;
+}
+
+.res-answers {
+    background: #F9FBFF;
+    margin-bottom: 12px;
+    border: 1px solid #F0F4F8;
+}
+
+.res-answers strong, .res-correct strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.res-answers ul {
+    list-style: none;
+}
+
+.res-answers li::before {
+    content: "• ";
+    color: #387FF5;
+    font-weight: bold;
+}
+
+.res-correct {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #C8E6C9;
+}
+
+.results-sidebar {
+    flex: 0 0 360px;
+    position: sticky;
+    top: 100px;
+}
+
+.score-card {
+    background: white;
+    border: 1px solid #E7ECF5;
+    border-radius: 30px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+
+.progress-ring-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.progress-ring__circle-bg {
+    stroke: #F4F7FF;
+}
+
+.progress-ring__circle {
+    transition: stroke-dashoffset 1s ease-in-out;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke-linecap: round;
+}
+
+.score-data {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-num {
+    font-size: 38px;
+    font-weight: 900;
+    color: #1C1F25;
+}
+
+.score-label {
+    font-size: 11px;
+    color: #8A94A6;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.verdict-badge {
+    padding: 14px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.verdict-badge.pass {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.verdict-badge.fail {
+    background: #FFF0F0;
+    color: #D93025;
+}
+
+.stats-table {
+    border-top: 1px solid #F0F4F8;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.s-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.s-row span {
+    color: #8A94A6;
+    font-weight: 500;
+}
+
+.s-row strong {
+    color: #1C1F25;
+    font-weight: 700;
+}
+
+.action-btns {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.score-card .start-btn {
+    width: 100%;
+    margin: 0;
+    padding: 16px;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.back-btn-alt {
+    text-decoration: none;
+    color: #8A94A6;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px;
+    transition: 0.3s;
+    border-radius: 12px;
+}
+
+.back-btn-alt:hover {
+    background: #F4F7FF;
+    color: #387FF5;
+}
+
+@media (max-width: 1100px) {
+    .results-wrapper {
+        flex-direction: column-reverse;
+    }
+    .results-sidebar {
+        width: 100%;
+        position: static;
+        flex: none;
+        margin-bottom: 40px;
+    }
+    .score-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .res-card {
+        padding: 20px;
+    }
+    .res-card h3 {
+        font-size: 17px;
+    }
+}

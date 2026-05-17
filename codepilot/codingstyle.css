@@ -1,0 +1,39 @@
+.maintenance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.maintenance__box {
+    max-width: 520px;
+    background: white;
+    border: 1px solid #E7ECF5;
+    border-radius: 24px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 40px #387FF514;
+}
+
+.maintenance__logo {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.maintenance__box h1 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: #1C1F25;
+}
+
+.maintenance__box p {
+    font-size: 15px;
+    color: #4B5162;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.maintenance__box span {
+    font-size: 13px;
+    color: #6B7280;
+}
