@@ -102,7 +102,7 @@
 <script>
 async function loadProfile() {
     const urlParams = new URLSearchParams(window.location.search);
-    const userLogin = urlParams.get('u');
+    const userLogin = "<?php echo $_GET['u'] ?? ''; ?>";
     
     const apiUrl = userLogin 
         ? `php/auth/get_user.php?login=${userLogin}` 

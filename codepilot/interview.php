@@ -2,7 +2,6 @@
     if (session_status() === PHP_SESSION_NONE) { session_start(); }
     require_once "php/config/connect.php";
     
-    // 1. Получаем данные для настройки (Направления и Уровни)
     $routes = mysqli_query($conn, "SELECT * FROM routes");
     $levels = mysqli_query($conn, "SELECT * FROM experience_levels ORDER BY level_value ASC");
 

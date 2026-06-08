@@ -4,19 +4,18 @@
 
     $interviewId = $_GET['id'] ?? 0;
     
-    $query = "SELECT i.*, l.title as lang_title, r.title as route_title 
-              FROM interviews i 
-              JOIN languages l ON i.language_id = l.id 
-              JOIN routes r ON i.route_id = r.id
-              WHERE i.id = ? AND i.user_id = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "ii", $interviewId, $_SESSION['user']['id']);
-    mysqli_stmt_execute($stmt);
-    $interview = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+    query = "SELECT i.* FROM interviews i 
+          WHERE i.id = ? AND i.user_id = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "ii", $interviewId, $_SESSION['user']['id']);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $interview = mysqli_fetch_assoc($result);
 
-    if (!$interview || $interview['status'] === 'completed') {
-        header("Location: interview.php"); exit;
-    }
+            if (!$interview) {
+                header("Location: interview.php"); 
+                exit;
+            }
 
     $page_title = "Собеседование - " . $interview['lang_title'];
     $extra_css = "teststyle.css";
