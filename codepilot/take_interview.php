@@ -4,8 +4,11 @@
 
     $interviewId = $_GET['id'] ?? 0;
     
-    query = "SELECT i.* FROM interviews i 
-          WHERE i.id = ? AND i.user_id = ?";
+    $query = "SELECT i.*, l.title as lang_title, r.title as route_title 
+              FROM interviews i 
+              JOIN languages l ON i.language_id = l.id 
+              JOIN routes r ON i.route_id = r.id
+              WHERE i.id = ? AND i.user_id = ?";
             $stmt = mysqli_prepare($conn, $query);
             mysqli_stmt_bind_param($stmt, "ii", $interviewId, $_SESSION['user']['id']);
             mysqli_stmt_execute($stmt);

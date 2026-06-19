@@ -73,6 +73,16 @@ foreach ($forbidden_words as $word) {
     }
 }
 
+if (!preg_match('/^[a-zA-Z0-9]+$/', $name)) {
+    echo json_encode(["success" => false, "message" => "Логин может содержать только английские буквы и цифры без пробелов"]);
+    exit;
+}
+
+if (mb_strlen($name) < 3 || mb_strlen($name) > 20) {
+    echo json_encode(["success" => false, "message" => "Логин должен быть от 3 до 20 символов"]);
+    exit;
+}
+
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode(["success" => false, "message" => "Введите корректный адрес почты"]);
     exit;

@@ -10,7 +10,6 @@ if (!isset($_SESSION['user']['id'])) {
 $data = json_decode(file_get_contents("php://input"), true);
 
 $userId = $_SESSION['user']['id'];
-$newLogin = trim($data["login"] ?? '');
 $newNickname = trim($data["nickname"] ?? '');
 $newLevel = trim($data["level"] ?? 'Стажер');
 $newTech = trim($data["tech_stack"] ?? '');
@@ -18,8 +17,8 @@ $newCountry = trim($data["country"] ?? '');
 $newCity = trim($data["city"] ?? '');
 $newBio = trim($data["bio"] ?? '');
 
-if (empty($newLogin)) {
-    echo json_encode(["success" => false, "message" => "Логин не может быть пустым"]);
+if (empty($newNickname)) {
+    echo json_encode(["success" => false, "message" => "Никнейм не может быть пустым"]);
     exit;
 }
 
@@ -64,7 +63,14 @@ $forbidden_words = ['хуй', 'хуё', 'хуе', 'хуя', 'пизда', 'пи�
     'убью', 'убить', 'зарежу', 'зарублю', 'застрелю', 'изобью', 'изнасилую', 'насилие',
     'издевательств', 'пытк', 'мучён', 'истязан'];
 
-function hasBadWords($text, $words) {
+if (!preg_match('/^[\p{L}\p{N}]+$/u', $newNickname)) {
+    echo json_encode([
+        "success" => false, 
+        "message" => "Никнейм может содержать только буквы и цифры без пробелов и знаков"
+    ]);
+    exit;
+}
+    function hasBadWords($text, $words) {
     foreach ($words as $word) {
         if (mb_stripos($text, $word) !== false) return true;
     }
@@ -72,7 +78,6 @@ function hasBadWords($text, $words) {
 }
 
 if (hasBadWords($newNickname, $forbidden_words) || 
-    hasBadWords($newLogin, $forbidden_words) || 
     hasBadWords($newBio, $forbidden_words) ||
     hasBadWords($newTech, $forbidden_words)) { 
     
@@ -80,13 +85,12 @@ if (hasBadWords($newNickname, $forbidden_words) ||
     exit;
 }
 
-$query = "UPDATE users SET login = ?, nickname = ?, level = ?, tech_stack = ?, country = ?, city = ?, bio = ? WHERE id = ?";
+$query = "UPDATE users SET nickname = ?, level = ?, tech_stack = ?, country = ?, city = ?, bio = ? WHERE id = ?";
 $stmt = mysqli_prepare($conn, $query);
 
-mysqli_stmt_bind_param($stmt, "sssssssi", $newLogin, $newNickname, $newLevel, $newTech, $newCountry, $newCity, $newBio, $userId);
+mysqli_stmt_bind_param($stmt, "ssssssi", $newNickname, $newLevel, $newTech, $newCountry, $newCity, $newBio, $userId);
 
 if (mysqli_stmt_execute($stmt)) {
-    $_SESSION['user']['login'] = $newLogin;
     $_SESSION['user']['nickname'] = $newNickname;
     $_SESSION['user']['level'] = $newLevel;
     $_SESSION['user']['tech_stack'] = $newTech;

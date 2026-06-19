@@ -35,7 +35,7 @@ if (isset($_SESSION['user'])) {
 
         <form onsubmit="handleSignUp(event)" novalidate>
             <div class="input-group">
-                <input type="text" id="reg-name" required placeholder=" ">
+                <input type="text" id="reg-name" required placeholder=" " maxlength="20">
                 <label>Логин</label>
             </div>
             <div class="input-group">
@@ -108,8 +108,15 @@ if (isset($_SESSION['user'])) {
         const pass = document.getElementById('reg-pass').value;
 
         if (!name) return showError("Придумайте логин");
-        if (name.length < 3) return showError("Логин слишком короткий");
-        if (/\s/.test(name)) return showError("Логин не может содержать пробелы");
+        
+        if (!/^[a-zA-Z0-9]+$/.test(name)) {
+            return showError("Логин может содержать только английские буквы и цифры");
+        }
+
+        if (name.length < 3 || name.length > 20) {
+            return showError("Логин должен быть от 3 до 20 символов");
+        }
+        
         if (!email || !email.includes('@')) return showError("Введите корректную почту");
         if (pass.length < 6) return showError("Пароль должен быть не менее 6 символов");
 

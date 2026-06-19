@@ -35,11 +35,11 @@
                     <div class="info-grid">
                         <div class="info-field">
                             <span>Отображаемое имя (Никнейм)</span>
-                            <input type="text" id="p-nickname-input" class="profile-input" autocomplete="off">
+                            <input type="text" id="p-nickname-input" class="profile-input" autocomplete="off" maxlength="20">
                         </div>
                         <div class="info-field">
                             <span>Логин (уникальный адрес профиля)</span>
-                            <input type="text" id="p-login-input" class="profile-input" autocomplete="off">
+                            <input type="text" id="p-login-input" class="profile-input disabled-input" autocomplete="off" disabled>
                         </div>
                     </div>
 
@@ -151,9 +151,20 @@ async function loadSettings() {
 
 async function saveSettings() {
     const btn = document.getElementById('save-btn');
+    const nicknameInput = document.getElementById("p-nickname-input").value.trim();
+
+    if (nicknameInput.length < 3 || nicknameInput.length > 20) {
+        showError("Никнейм должен быть от 3 до 20 символов");
+        return;
+    }
+
+    if (!/^[a-zA-Z0-9а-яА-ЯёЁ]+$/.test(nicknameInput)) {
+        showError("Никнейм может содержать только буквы и цифры без пробелов");
+        return;
+    }
+
     const payload = {
-        nickname: document.getElementById("p-nickname-input").value,
-        login: document.getElementById("p-login-input").value,
+        nickname: nicknameInput,
         level: document.getElementById("p-level-input").value,
         tech_stack: document.getElementById("p-tech-input").value,
         country: document.getElementById("p-country-input").value,
@@ -179,14 +190,17 @@ async function saveSettings() {
         } else {
             showError(result.message);
             btn.innerText = "Сохранить изменения";
+            btn.style.background = "";
             btn.disabled = false;
         }
     } catch (e) {
         showError("Ошибка сети.");
         btn.innerText = "Сохранить изменения";
+        btn.style.background = "";
         btn.disabled = false;
     }
 }
+
 
 async function changePassword() {
     const oldPass = document.getElementById('old-pass').value;
